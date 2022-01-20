@@ -18,7 +18,7 @@ body {
   gap: 4px;
 }
 
-.grid button {
+.grid .square {
   background-color: white;
   border: none;
   height: 100%;
