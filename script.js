@@ -36,18 +36,40 @@ const tictactoe = (() => {
           playerTwoTurn = 1;
           gameboard.splice(index, 1, playerOne.marker);
           tile.style.pointerEvents = "none";
+          checkWinner();
         } else if (playerOneTurn === 0) {
           tile.textContent = playerTwo.marker;
           playerTwoTurn = 0;
           playerOneTurn = 1;
           gameboard.splice(index, 1, playerTwo.marker);
           tile.style.pointerEvents = "none";
+          checkWinner();
         }
       });
     });
   };
 
-  const checkWinner = () => {};
+  const checkTie = () => {
+    const fullBoard = gameboard.every((tile) => {
+      if (tile === "X" || tile === "O") {
+        return true;
+      }
+    });
+    if (fullBoard === true) {
+      console.log("Tie game");
+    }
+  };
+
+  const checkWinner = () => {
+    checkTie();
+    winConditions.forEach((conditions) => {
+      if (gameboard[conditions[0]] === "X" && gameboard[conditions[1]] === "X" && gameboard[conditions[2]] === "X") {
+        console.log("Player 1 Wins!");
+      } else if (gameboard[conditions[0]] === "O" && gameboard[conditions[1]] === "O" && gameboard[conditions[2]] === "O") {
+        console.log("Player 2 Wins!")
+      }
+    });
+  };
 
   const winConditions = [
     [0, 1, 2],
@@ -65,6 +87,7 @@ const tictactoe = (() => {
     game,
     winConditions,
     checkWinner,
+    checkTie,
   };
 })();
 
