@@ -20,6 +20,7 @@ const tictactoe = (() => {
     i++;
   });
 
+  const commentary = document.querySelector(".commentary h1");
   const squares = document.querySelectorAll(".grid .square");
 
   const playerOne = Player("One", "X");
@@ -32,17 +33,21 @@ const tictactoe = (() => {
       tile.addEventListener("click", () => {
         if (playerOneTurn === 1) {
           tile.textContent = playerOne.marker;
+          tile.style.color = "#FFB703";
           playerOneTurn = 0;
           playerTwoTurn = 1;
           gameboard.splice(index, 1, playerOne.marker);
           tile.style.pointerEvents = "none";
+          commentary.textContent = "Player 2, make your move!";
           checkWinner();
         } else if (playerOneTurn === 0) {
           tile.textContent = playerTwo.marker;
+          tile.style.color = "#FB8500";
           playerTwoTurn = 0;
           playerOneTurn = 1;
           gameboard.splice(index, 1, playerTwo.marker);
           tile.style.pointerEvents = "none";
+          commentary.textContent = "Player 1, your turn!";
           checkWinner();
         }
       });
@@ -56,17 +61,27 @@ const tictactoe = (() => {
       }
     });
     if (fullBoard === true) {
-      console.log("Tie game");
+      commentary.textContent = "It's a tie game!"
     }
   };
 
   const checkWinner = () => {
     checkTie();
     winConditions.forEach((conditions) => {
-      if (gameboard[conditions[0]] === "X" && gameboard[conditions[1]] === "X" && gameboard[conditions[2]] === "X") {
-        console.log("Player 1 Wins!");
-      } else if (gameboard[conditions[0]] === "O" && gameboard[conditions[1]] === "O" && gameboard[conditions[2]] === "O") {
-        console.log("Player 2 Wins!")
+      if (
+        gameboard[conditions[0]] === "X" &&
+        gameboard[conditions[1]] === "X" &&
+        gameboard[conditions[2]] === "X"
+      ) {
+        commentary.textContent = "Player 1 is the winner!"
+        grid.style.pointerEvents = "none";
+      } else if (
+        gameboard[conditions[0]] === "O" &&
+        gameboard[conditions[1]] === "O" &&
+        gameboard[conditions[2]] === "O"
+      ) {
+        commentary.textContent = "Player 1 is the winner!"
+        grid.style.pointerEvents = "none";
       }
     });
   };
@@ -82,12 +97,15 @@ const tictactoe = (() => {
     [2, 4, 6],
   ];
 
+  const reset = document.querySelector(".reset button");
+
+  reset.addEventListener("click", () => {
+    document.location.reload();
+  });
+
   return {
-    gameboard,
     game,
-    winConditions,
-    checkWinner,
-    checkTie,
+    reset,
   };
 })();
 
