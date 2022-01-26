@@ -1,3 +1,4 @@
+//Factory function to create a new player
 const Player = (player, marker) => {
   return {
     player,
@@ -5,11 +6,15 @@ const Player = (player, marker) => {
   };
 };
 
+//Module to store the gameboard, and game functionality
 const tictactoe = (() => {
   const gameboard = ["", "", "", "", "", "", "", "", ""];
 
   const grid = document.querySelector(".grid");
+  const commentary = document.querySelector(".commentary h1");
+  const squares = document.querySelectorAll(".grid .square");
 
+  //Creates the tic-tac-toe grid
   let i = 0;
   gameboard.forEach((tile) => {
     const square = document.createElement("div");
@@ -20,14 +25,12 @@ const tictactoe = (() => {
     i++;
   });
 
-  const commentary = document.querySelector(".commentary h1");
-  const squares = document.querySelectorAll(".grid .square");
-
   const playerOne = Player("One", "X");
   let playerOneTurn = 1;
   const playerTwo = Player("Two", "O");
   let playerTwoTurn = 0;
 
+  //Functionality to take turns and check for a winner/tie game
   const game = () => {
     squares.forEach((tile, index) => {
       tile.addEventListener("click", () => {
@@ -61,7 +64,7 @@ const tictactoe = (() => {
       }
     });
     if (fullBoard === true) {
-      commentary.textContent = "It's a tie game!"
+      commentary.textContent = "It's a tie game!";
     }
   };
 
@@ -73,19 +76,20 @@ const tictactoe = (() => {
         gameboard[conditions[1]] === "X" &&
         gameboard[conditions[2]] === "X"
       ) {
-        commentary.textContent = "Player 1 is the winner!"
+        commentary.textContent = "Player 1 is the winner!";
         grid.style.pointerEvents = "none";
       } else if (
         gameboard[conditions[0]] === "O" &&
         gameboard[conditions[1]] === "O" &&
         gameboard[conditions[2]] === "O"
       ) {
-        commentary.textContent = "Player 1 is the winner!"
+        commentary.textContent = "Player 1 is the winner!";
         grid.style.pointerEvents = "none";
       }
     });
   };
 
+  //Possible permutations for a player to win
   const winConditions = [
     [0, 1, 2],
     [3, 4, 5],
