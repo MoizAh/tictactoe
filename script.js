@@ -1,4 +1,4 @@
-//Factory function to create a new player
+// Factory function to create a new player
 const Player = (player, marker) => {
   return {
     player,
@@ -6,15 +6,14 @@ const Player = (player, marker) => {
   };
 };
 
-//Module to store the gameboard, and game functionality
+// Module to store the gameboard, and game functionality
 const tictactoe = (() => {
   const gameboard = ["", "", "", "", "", "", "", "", ""];
 
   const grid = document.querySelector(".grid");
   const commentary = document.querySelector(".commentary h1");
-  const squares = document.querySelectorAll(".grid .square");
 
-  //Creates the tic-tac-toe grid
+  // Creates the tic-tac-toe grid
   let i = 0;
   gameboard.forEach((tile) => {
     const square = document.createElement("div");
@@ -25,12 +24,15 @@ const tictactoe = (() => {
     i++;
   });
 
+  // Accessing squares created in previous function
+  const squares = document.querySelectorAll(".grid .square");
+
   const playerOne = Player("One", "X");
   let playerOneTurn = 1;
   const playerTwo = Player("Two", "O");
   let playerTwoTurn = 0;
 
-  //Functionality to take turns and check for a winner/tie game
+  // Functionality to take turns and check for a winner/tie game
   const game = () => {
     squares.forEach((tile, index) => {
       tile.addEventListener("click", () => {
@@ -89,7 +91,7 @@ const tictactoe = (() => {
     });
   };
 
-  //Possible permutations for a player to win
+  // Possible permutations for a player to win
   const winConditions = [
     [0, 1, 2],
     [3, 4, 5],
