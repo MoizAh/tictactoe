@@ -85,7 +85,7 @@ const tictactoe = (() => {
         gameboard[conditions[1]] === "O" &&
         gameboard[conditions[2]] === "O"
       ) {
-        commentary.textContent = "Player 1 is the winner!";
+        commentary.textContent = "Player 2 is the winner!";
         grid.style.pointerEvents = "none";
       }
     });
